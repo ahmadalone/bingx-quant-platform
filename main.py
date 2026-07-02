@@ -26,7 +26,7 @@ async def main():
     sample_signal = {"id": "sig1", "side": "BUY", "symbol": "BTC-USDT", "quantity": 0.001}
     await execution.execute_signal(sample_signal)
 
-    print("Platform with advanced research started.")
+    print("Platform with enhanced risk & research started.")
 
 if __name__ == "__main__":
     asyncio.run(main())
