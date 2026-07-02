@@ -1,21 +1,11 @@
 # BingX Quant Platform
 
-Institutional-grade autonomous trading platform for BingX Exchange.
+Institutional-grade autonomous trading platform.
 
-## Overview
-Production-ready Python trading system with advanced quant research, risk management, and execution capabilities.
+## Quick Start
+1. `git clone` this repo
+2. `pip install -r requirements.txt`
+3. Add `.env` with BingX API keys
+4. `python main.py`
 
-## Features
-- BingX API integration (Spot & Futures)
-- Multi-strategy portfolio
-- Advanced backtesting
-- Real-time dashboard
-- Institutional risk controls
-
-## Installation
-1. Clone the repo
-2. pip install -r requirements.txt
-3. Configure .env with BingX keys
-4. python main.py
-
-Live system with real BingX SDK integration.
+Live WS, real execution, full research engine.

@@ -1,0 +1,15 @@
+[project]
+name = "bingx_quant_platform"
+version = "0.1.0"
+description = "Institutional BingX Trading Platform"
+requires-python = ">=3.13"
+dependencies = [
+    "bingx-python",
+    "aiohttp",
+    "pandas",
+    "numpy",
+    "sqlalchemy",
+    "pydantic-settings",
+    "pyside6",
+    "python-dotenv",
+]
