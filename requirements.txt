@@ -1,0 +1,8 @@
+bingx-python
+aiohttp
+pandas
+numpy
+sqlalchemy
+pydantic-settings
+pyside6
+python-dotenv
