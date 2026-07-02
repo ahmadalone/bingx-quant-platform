@@ -16,12 +16,17 @@ class BingXExchange:
             api_secret=settings.BINGX_API_SECRET,
             base_uri='https://open-api.bingx.com' if not settings.BINGX_TESTNET else 'https://open-api-testnet.bingx.com'
         )
+        # Real WebSocket
         self.market_stream = MarketDataStream()
-        self.market_stream.connect()
+        try:
+            self.market_stream.connect()
+        except Exception as e:
+            logger.warning(f"WS connect issue: {e}")
 
     async def get_balance(self) -> Dict:
+        """Real balance fetch."""
         try:
-            balance = self.client.get_balance()
+            balance = self.client.account()
             return balance
         except Exception as e:
             logger.error(f"Balance fetch error: {e}")
@@ -39,6 +44,6 @@ class BingXExchange:
         logger.info(f"Subscribed to live data for {symbol}")
 
     def _handle_ws_message(self, data):
-        logger.info(f"Live WS: {data}")
+        logger.info(f"Live WS data: {data}")
 
 print("BingX Exchange with real WS ready.")
