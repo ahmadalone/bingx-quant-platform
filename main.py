@@ -25,7 +25,10 @@ async def main():
     sample_signal = {"side": "BUY", "symbol": "BTC-USDT", "confidence": 0.85}
     await execution.execute_signal(sample_signal)
 
-    print("Full Platform started successfully.")
+    print("Full Platform started successfully. All engines wired.")
+
+    # GUI note
+    print("Dashboard ready - run dashboard/gui.py separately for PySide6 UI.")
 
 if __name__ == "__main__":
     asyncio.run(main())
