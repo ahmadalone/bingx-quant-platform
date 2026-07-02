@@ -6,3 +6,4 @@ sqlalchemy
 pydantic-settings
 pyside6
 python-dotenv
+websocket-client
