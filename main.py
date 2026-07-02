@@ -4,12 +4,13 @@ from config.settings import settings
 from exchange.client import BingXExchange
 from research.engine import ResearchEngine
 from risk.engine import RiskEngine
-from execution.engine import ExecutionEngine
+from execution.execution_engine import ExecutionEngine
 
 logging.basicConfig(level=logging.INFO)
 
 async def main():
     exchange = BingXExchange()
+    await exchange.connect()  # New
     research = ResearchEngine()
     risk = RiskEngine()
     execution = ExecutionEngine(exchange, risk)
@@ -22,13 +23,10 @@ async def main():
     strategies = research.research(None)
     print("Top strategies:", strategies)
 
-    sample_signal = {"side": "BUY", "symbol": "BTC-USDT", "confidence": 0.85}
+    sample_signal = {"id": "sig1", "side": "BUY", "symbol": "BTC-USDT", "quantity": 0.001, "confidence": 0.85}
     await execution.execute_signal(sample_signal)
 
-    print("Full Platform started successfully. All engines wired.")
-
-    # GUI note
-    print("Dashboard ready - run dashboard/gui.py separately for PySide6 UI.")
+    print("Full Platform with improved execution started.")
 
 if __name__ == "__main__":
     asyncio.run(main())
