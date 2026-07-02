@@ -17,13 +17,16 @@ async def main():
     balance = await exchange.get_balance()
     print("Balance:", balance)
 
+    # Real WebSocket live data
+    exchange.subscribe_market_data("BTC-USDT")
+
     strategies = research.research(None)
     print("Top strategies:", strategies)
 
     sample_signal = {"side": "BUY", "symbol": "BTC-USDT", "confidence": 0.85}
     await execution.execute_signal(sample_signal)
 
-    print("Full Platform started successfully. All engines wired.")
+    print("Full Platform with live WS started successfully.")
 
 if __name__ == "__main__":
     asyncio.run(main())
