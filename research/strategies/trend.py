@@ -1,0 +1,1 @@
+# Sample strategy with structured output
