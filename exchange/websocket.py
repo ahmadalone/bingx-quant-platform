@@ -7,11 +7,9 @@ from typing import Callable
 logger = logging.getLogger(__name__)
 
 class BingXWebSocket:
-    """Robust WS with reconnection."""
-
     def __init__(self):
         self.ws = None
-        self.uri = "wss://open-api-swap.bingx.com/swap-ws"
+        self.uri = "wss://open-api-ws.bingx.com/market"
         self.subscriptions = []
         self.message_handler = None
         self.running = False
