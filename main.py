@@ -5,6 +5,7 @@ from exchange.client import BingXExchange
 from research.engine import ResearchEngine
 from risk.engine import RiskEngine
 from execution.execution_engine import ExecutionEngine
+from dashboard.gui import TradingDashboard
 
 logging.basicConfig(level=logging.INFO)
 
@@ -26,7 +27,16 @@ async def main():
     sample_signal = {"id": "sig1", "side": "BUY", "symbol": "BTC-USDT", "quantity": 0.001}
     await execution.execute_signal(sample_signal)
 
-    print("Platform with enhanced risk & research started.")
+    print("Platform started. Launching dashboard...")
+    # Dashboard in separate thread or process for GUI
+    import threading
+    def run_gui():
+        app = TradingDashboard()
+        app.show()
+    threading.Thread(target=run_gui, daemon=True).start()
+
+    # Keep running
+    await asyncio.sleep(30)  # Run for demo
 
 if __name__ == "__main__":
     asyncio.run(main())
