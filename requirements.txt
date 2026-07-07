@@ -1,4 +1,3 @@
-bingx-python
 aiohttp
 pandas
 numpy
@@ -6,4 +5,5 @@ sqlalchemy
 pydantic-settings
 pyside6
 python-dotenv
-websocket-client
+websockets
+bingx-python
