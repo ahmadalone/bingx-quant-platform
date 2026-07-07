@@ -1,11 +1,18 @@
 # BingX Quant Platform
 
-Institutional-grade autonomous trading platform.
+Institutional-grade autonomous trading platform for BingX.
+
+## Features
+- Real-time WebSocket market data
+- REST API trading
+- Risk management
+- Strategy research engine
+- Dashboard GUI
 
 ## Quick Start
-1. `git clone` this repo
-2. `pip install -r requirements.txt`
-3. Add `.env` with BingX API keys
+1. Clone the repo
+2. `cp .env.example .env` and fill API keys
+3. `pip install -r requirements.txt`
 4. `python main.py`
 
-Live WS, real execution, full research engine.
+**Note**: Update requirements.txt to include `websockets` instead of or in addition to `websocket-client`.
