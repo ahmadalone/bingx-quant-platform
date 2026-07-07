@@ -28,5 +28,5 @@ class BingXExchange:
 
     async def subscribe_market_data(self, symbol: str):
         await self.ws.subscribe(f"{symbol}@trade")
-        self.ws.set_handler(lambda d: logger.info(f"WS: {d}"))
+        self.ws.set_handler(lambda d: logger.info(f"Market data: {d}"))
         logger.info(f"Subscribed to {symbol}")
