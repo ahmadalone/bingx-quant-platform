@@ -13,6 +13,6 @@ class ResearchEngine:
 
     def research(self, data):
         logger.info("Research running...")
-        return ["TrendFollowing"]
+        return self.registry.get_top_strategies()
 
-print("Research Engine ready.")
+# No top-level print
