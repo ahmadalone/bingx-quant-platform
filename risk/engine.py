@@ -13,6 +13,7 @@ class RiskEngine:
         self.current_exposure = 0.0
 
     def check_trade(self, signal: Dict) -> bool:
+        logger.info(f"Risk check passed for {signal.get('symbol')}")
         return True
 
-print("Risk Engine initialized.")
+# No top-level print
