@@ -13,6 +13,6 @@ class ResearchEngine:
 
     def research(self, data):
         logger.info("Research running...")
-        return self.registry.get_top_strategies()
+        return [strat.name for strat in self.registry.get_top_strategies()]
 
-# No top-level print
+# Research Engine ready.
