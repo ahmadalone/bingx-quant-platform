@@ -26,25 +26,30 @@ class BingXRestClient:
     def _sign(self, params: Dict = None) -> str:
         if not params:
             params = {}
+        params = params.copy()
         params['timestamp'] = int(time.time() * 1000)
         query = urlencode(sorted(params.items()))
         signature = hmac.new(self.api_secret.encode(), query.encode(), hashlib.sha256).hexdigest()
         return query + '&signature=' + signature
 
-    async def request(self, method: str, endpoint: str, params: Dict = None, signed: bool = False) -> Dict:
+    async def request(self, method: str, endpoint: str, params: Dict = None, signed: bool = False, json_body: bool = False) -> Dict:
         for attempt in range(3):
             try:
                 session = await self._get_session()
                 url = f"{self.base_url}{endpoint}"
+                headers = {'Content-Type': 'application/json'} if json_body else None
+                data = None
                 if signed:
                     full_query = self._sign(params)
                     url += '?' + full_query
-                async with session.request(method, url, timeout=10) as resp:
-                    data = await resp.json()
-                    if data.get('code') == 0:
-                        return data.get('data', data)
+                elif params and method.upper() == 'POST':
+                    data = params
+                async with session.request(method, url, params=params if not signed and method.upper() == 'GET' else None, json=data if json_body else None, data=data if not json_body else None, headers=headers, timeout=10) as resp:
+                    data_resp = await resp.json()
+                    if data_resp.get('code') == 0:
+                        return data_resp.get('data', data_resp)
                     else:
-                        logger.error(f"BingX error: {data}")
+                        logger.error(f"BingX error: {data_resp}")
                         return {}
             except Exception as e:
                 logger.warning(f"Request attempt {attempt}: {e}")
@@ -55,7 +60,8 @@ class BingXRestClient:
         return await self.request('GET', '/openApi/swap/v2/user/balance', signed=True)
 
     async def place_order(self, symbol, side, qty, price=None, order_type="LIMIT"):
-        params = {"symbol": symbol, "side": side, "quantity": qty, "type": order_type}
+        params = {"symbol": symbol, "side": side, "quantity": str(qty), "type": order_type}
         if price:
-            params["price"] = price
+            params["price"] = str(price)
+        # For POST, use signed query
         return await self.request('POST', '/openApi/swap/v2/trade/order', params, signed=True)
